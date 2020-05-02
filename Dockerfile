@@ -8,7 +8,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get update -y \
     && apt-get install -y obs-studio \
     && apt-get install -y vlc \
-    && apt-get install nvidia-driver-430 \
+    && apt-get install -y nvidia-driver-430 \
     && apt-get clean -y \
     
 
