@@ -1,4 +1,4 @@
-FROM bb12489/gui-docker:1.01
+FROM bb12489/gui-docker:latest
 
 RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get update -y \
