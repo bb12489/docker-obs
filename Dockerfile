@@ -6,10 +6,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && add-apt-repository ppa:obsproject/obs-studio \
     && add-apt-repository ppa:graphics-drivers/ppa \
     && apt-get update -y \
-    && apt-get install -y ffmpeg \
-    && apt-get install -y obs-studio \
+    && snap install -y obs-studio \
     && apt-get install -y vlc \
-    && apt-get install -y nvidia-driver-440 \
     && apt-get clean -y \
     
 
