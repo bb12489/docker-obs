@@ -1,4 +1,5 @@
 FROM    ubuntu:18.04
+ARG DEBIAN_FRONTEND="noninteractive"
 # for the VNC connection
 EXPOSE 5900
 # for the browser VNC client
@@ -7,7 +8,6 @@ EXPOSE 5901
 ENV VNC_PASSWD=123456
 # Make sure the dependencies are met
 RUN apt-get update \
-	&& export DEBIAN_FRONTEND=noninteractive \
 	&& apt install -y tigervnc-standalone-server fluxbox xterm git net-tools python python-numpy scrot wget software-properties-common vlc module-init-tools avahi-daemon \
 	&& sed -i 's/geteuid/getppid/' /usr/bin/vlc \
     && add-apt-repository ppa:obsproject/obs-studio \
