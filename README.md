@@ -7,7 +7,17 @@ Here is a screenshot:
 # To run
 You can start the container with:
 
-`docker run --shm-size=256m -it -p 5900:5900 -p 5901:5901 -e VNC_PASSWD=123456 daedilus1/docker-obs-ndi:latest`
+`docker run --shm-size=256m -it -p 5900:5900 -p 5901:5901 -e VNC_PASSWD=123456 -v path to data:/config daedilus1/docker-obs-ndi:latest`
+
+or
+
+`docker create \
+  --name=OBS-NDI \
+  -p 5900:5900 \
+  -p 5901:5901 \
+  -v path to data:/config \
+  daedilus1/docker-obs-ndi`
+  
 
 The shm-size argument is to make sure that the webclient does not run out of shared memory and crash. You can change the default VNC password of '123456' on the docker run command to whatever you wish.
 
