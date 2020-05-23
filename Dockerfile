@@ -8,7 +8,7 @@ EXPOSE 5901
 ENV VNC_PASSWD=123456
 
 # Make sure the dependencies are met
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt install -y tigervnc-standalone-server fluxbox xterm git net-tools python python-numpy scrot && rm -rf /var/lib/apt/lists/*
+RUN add-apt-repository ppa:obsproject/obs-studio && apt-get update && DEBIAN_FRONTEND=noninteractive apt install -y tigervnc-standalone-server fluxbox xterm git net-tools python python-numpy scrot && rm -rf /var/lib/apt/lists/* && apt-get install -y software-properties-common && apt-get install -y obs-studio && apt-get install -y vlc && sed -i 's/geteuid/getppid/' /usr/bin/vlc && apt-get install -y wget && apt-get install -y module-init-tools && apt-get install -y avahi-daemon && apt-get clean -y
 
 # Install VNC. Requires net-tools, python and python-numpy
 RUN git clone --branch v1.0.0 --single-branch https://github.com/novnc/noVNC.git /opt/noVNC
@@ -26,18 +26,6 @@ RUN echo "?package(bash):needs=\"X11\" section=\"DockerCustom\" title=\"Xterm\" 
 
 ENTRYPOINT ["/opt/container_startup.sh"]
 
-RUN export DEBIAN_FRONTEND=noninteractive \
-    && apt-get update -y \
-    && apt-get install -y software-properties-common \
-    && add-apt-repository ppa:obsproject/obs-studio \
-    && apt-get update -y \
-    && apt-get install -y obs-studio \
-    && apt-get install -y vlc \
-    && sed -i 's/geteuid/getppid/' /usr/bin/vlc \
-    && apt-get install -y wget \
-    && apt-get install -y module-init-tools \
-    && apt-get install -y avahi-daemon \
-    && apt-get clean -y \
 RUN echo "?package(bash):needs=\"X11\" section=\"DockerCustom\" title=\"OBS Screencast\" command=\"obs\"" >> /usr/share/menu/custom-docker && update-menus
 
 RUN wget -q -O /tmp/libndi4_4.5.1-1_amd64.deb https://github.com/Palakis/obs-ndi/releases/download/4.9.1/libndi4_4.5.1-1_amd64.deb
