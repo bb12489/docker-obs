@@ -28,6 +28,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && rm -rf /var/lib/apt/lists/* \
     && chmod +x /opt/container_startup.sh \
     && chmod +x /opt/x11vnc_entrypoint.sh \
+    && mkdir /config \
     && ln -s /config /root/.config/obs-studio
 RUN echo "?package(bash):needs=\"X11\" section=\"DockerCustom\" title=\"OBS Screencast\" command=\"obs\"" >> /usr/share/menu/custom-docker && update-menus \
     && echo "?package(bash):needs=\"X11\" section=\"DockerCustom\" title=\"Xterm\" command=\"xterm -ls -bg black -fg white\"" >> /usr/share/menu/custom-docker && update-menus
