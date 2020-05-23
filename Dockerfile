@@ -28,6 +28,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && /etc/init.d/dbus start \
     && /etc/init.d/avahi-daemon start \
     && rm -rf /var/lib/apt/lists/* \
-    && chmod +x /opt/container_startup.sh  
+    && chmod +x /opt/container_startup.sh \
+    && chmod +x /opt/x11vnc_entrypoint.sh
 RUN echo "?package(bash):needs=\"X11\" section=\"DockerCustom\" title=\"OBS Screencast\" command=\"obs\"" >> /usr/share/menu/custom-docker && update-menus
 ENTRYPOINT ["/opt/container_startup.sh"]
