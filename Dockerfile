@@ -6,6 +6,7 @@ EXPOSE 5900
 EXPOSE 5901
 # Use environment variable to allow custom VNC passwords
 ENV VNC_PASSWD=123456
+ENV HOME="/config"
 # Make sure the dependencies are met
 RUN apt-get update \
 	&& apt install -y tigervnc-standalone-server fluxbox xterm git net-tools python python-numpy scrot wget software-properties-common vlc module-init-tools avahi-daemon \
@@ -32,9 +33,8 @@ RUN apt-get update \
     && chmod +x /opt/container_startup.sh \
     && chmod +x /opt/x11vnc_entrypoint.sh \
     && mkdir /config \
-	&& mkdir /root/.config \
-	&& mkdir /root/.config/obs-studio \
-	&& ln -s /config /root/.config/obs-studio
+    && mkdir -p /root/.config/obs-studio 
+#    && ln -s /root/.config/obs-studio /config
 # Add menu entries to the container
 RUN echo "?package(bash):needs=\"X11\" section=\"DockerCustom\" title=\"OBS Screencast\" command=\"obs\"" >> /usr/share/menu/custom-docker \
     && echo "?package(bash):needs=\"X11\" section=\"DockerCustom\" title=\"Xterm\" command=\"xterm -ls -bg black -fg white\"" >> /usr/share/menu/custom-docker && update-menus
